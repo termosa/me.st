@@ -205,12 +205,6 @@ $(document).ready(function() {
     reverse: true
   });
 
-  /*======== Google Map Setup ========*/
-  if($('#map').length) {
-    initMap();
-   }
-
-
   /*======== Contact Form Setup ========*/
   contactFormSetup();
 });
@@ -256,7 +250,9 @@ function ajaxPortfolioSetup($ajaxLink, $ajaxContainer) {
 }
 
 /********** Function Map Initialization **********/
-function initMap() {
+function initMap() { // wiill be called by loaded google maps scripts
+  if (!$('#map').length) return;
+
   var latitude = $("#map").data('latitude'),
     longitude = $("#map").data('longitude'),
     zoom = $("#map").data('zoom'),
