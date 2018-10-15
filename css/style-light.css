@@ -1857,3 +1857,11 @@ header .header-mobile .header-toggle i {
     border: none; 
   }
 }
+
+/* STYLE FIXES */
+.cf-error {
+  border-color: #9c2323;
+}
+.about a {
+  color: #00A3E1;
+}

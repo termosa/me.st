@@ -300,9 +300,7 @@ function contactFormSetup() {
 
   $('#contact-form').on('submit', function(e) {
     e.preventDefault();
-    var name = $('#cf-name').val(),
-      email = $('#cf-email').val(),
-      message = $('#cf-message').val(),
+    var message = $('#cf-message').val(),
       $messageBox = $('#contact-form .message'),
       required = 0;
 
@@ -321,22 +319,7 @@ function contactFormSetup() {
       }
     });
     if( required === 0 ) {
-      $.ajax({
-        type: 'POST',
-        url: 'mail.php',
-        data: {
-          cf_name: name,
-          cf_email: email,
-          cf_message: message
-        },
-        success: function(data) {
-          $("#contact-form .input__field").val("");
-          showAlertBox(data.status, data.responseText);
-        },
-        error: function(data) {
-          showAlertBox(data.status, data.responseText);
-        }
-      });
+      sendEmail('contact@me.st', '[me.st] I need to talk to you…', message);
     }
   });
 }
@@ -404,4 +387,13 @@ function onSwipe(element, handler) {
     xDown = null;
     yDown = null;
   }
+}
+
+/********** Function Sending Email **********/
+function sendEmail(to, subject, body) {
+  var sbj = encodeURIComponent(subject)
+  var bdy = encodeURIComponent(body)
+  var link = document.createElement('a')
+  link.setAttribute('href', 'mailto:' + to + '?subject=' + sbj + '&body=' + bdy)
+  link.click()
 }
